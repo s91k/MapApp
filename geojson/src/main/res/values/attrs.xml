@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GeoJsonView">
+        <attr name="base_color" format="color"/>
+        <attr name="fill_color" format="color"/>
+        <attr name="stroke_color" format="color"/>
+        <attr name="stroke_width" format="float"/>
+        <attr name="file_id" format="reference"/>
+    </declare-styleable>
+</resources>

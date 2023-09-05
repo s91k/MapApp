@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SwimWorld</string>
+    <string name="swim_yes">Swim</string>
+    <string name="swim_no">Undo</string>
+</resources>
