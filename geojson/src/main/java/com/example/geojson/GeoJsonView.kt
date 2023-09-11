@@ -1,7 +1,6 @@
 package com.example.geojson
 
 import android.content.Context
-import android.content.res.Resources
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
@@ -145,10 +144,14 @@ class GeoJsonView(context: Context, attrs: AttributeSet) : TextureView(context, 
         return true
     }
 
+    fun getAllFeatures(): List<GeoJsonMultiPolygonFeature> {
+        return thread.multiPolygons.toList()
+    }
+
     private class RenderingThread(surface: TextureView, strokePaint: Paint, fillPaint: Paint): Thread(){
         private val surface = surface
 
-        private var multiPolygons: MutableList<GeoJsonMultiPolygonFeature> = mutableListOf()
+        var multiPolygons: MutableList<GeoJsonMultiPolygonFeature> = mutableListOf()
 
         private var mapBounds: RectF = RectF()
 
@@ -180,7 +183,7 @@ class GeoJsonView(context: Context, attrs: AttributeSet) : TextureView(context, 
             }
 
             while(running && !interrupted()){
-                if(redraw){
+                if(redraw == true || multiPolygons.any { it.redraw }){
                     val drawStartTime = System.currentTimeMillis()
 
                     val canvas: Canvas? = surface.lockCanvas()

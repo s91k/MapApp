@@ -17,9 +17,20 @@ class GeoJsonMultiPolygonFeature(polygons: MutableList<MutableList<MutableList<P
 
     // Stored as ARBG-values
     var strokeColor: Int = strokeColor
+        set(value){
+            redraw = true
+            field = value
+        }
+
     var fillColor: Int = fillColor
+        set(value){
+            redraw = true
+            field = value
+        }
 
     val properties: JSONObject = properties
+
+    internal var redraw: Boolean = true
 
     init {
         calcBounds()
@@ -166,6 +177,8 @@ class GeoJsonMultiPolygonFeature(polygons: MutableList<MutableList<MutableList<P
                 canvas.drawPath(path, strokePaint)
             }
         }
+
+        redraw = false
     }
 
     fun contains(p: PointF): Boolean {
